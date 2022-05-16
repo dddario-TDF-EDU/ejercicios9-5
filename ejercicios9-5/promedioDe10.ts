@@ -15,11 +15,4 @@ botonaso.addEventListener("click", () => {
   alert("el promedio de notas es: " + promedio);
 });
 
-//for ( notas =0 ; notas<=3; notas++){
-
-//let notasTotal:number=0;
-//let notaAux:number=Number(prompt("Ingrese notas:";"nota"));
-//let notasTotal=notasTotal+notaAux;
-//console.log(notaAux)
-
-//}
+//cambiar valor del while a 10 para que se cumpla la condicion pedida
