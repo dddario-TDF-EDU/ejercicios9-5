@@ -17,7 +17,7 @@ function claseNota(nota: number, tipoNota: number): number {
   }
 }
 
-function verificacionNota(nota: number, tipoNota: number): number {
+function verificacionNota(tipoNota: number): number {
   let notaAuxLocal = Number(prompt("Ingrese la nota:"));
 
   if (notaAuxLocal < 11 && notaAuxLocal >= 0) {
@@ -29,11 +29,11 @@ function verificacionNota(nota: number, tipoNota: number): number {
   return notaAuxLocal;
 }
 
-function verificacionNombre(finCiclo: boolean): boolean {
-  finCiclo = false;
+function verificacionNombre(): boolean {
+  let finCiclo: boolean = false;
   let nombreAux: string = prompt("ingrese el nombre del estudiante");
-  if (nombreAux != "") {
-    alert("Nombre valido, proceda a cargar los datos");
+  if (nombreAux !== "") {
+    alert("Nombre " + nombreAux + " valido, proceda a cargar los datos");
   } else {
     alert("Fin del ciclo, comienza calculo del promedio.");
     finCiclo = true;
@@ -49,14 +49,12 @@ botonaso.addEventListener("click", () => {
   let notaTotal: number = 0;
 
   while (finCiclo !== true) {
-    // if (finCiclo == true) {
-    //   alert("comprobado, este while no funciona , es " + finCiclo);
-    // }
-    finCiclo = verificacionNombre(finCiclo);
-    //alert("comprobado, este while no funciona , es " + finCiclo);
+   
+    finCiclo = verificacionNombre();
+  
     if (finCiclo == false) {
       for (let cantNotas: number = 1; cantNotas < 4; cantNotas++) {
-        notaAux = verificacionNota(notaAux, cantNotas);
+        notaAux = verificacionNota(cantNotas);
         if (notaAux != -1) {
           notaMedioCiclo = notaMedioCiclo + notaAux;
         } else {
@@ -66,17 +64,18 @@ botonaso.addEventListener("click", () => {
       }
     }
     notaTotal = notaTotal + notaMedioCiclo;
-    if (notaMedioCiclo != 0) {
+    if (notaMedioCiclo !== 0) {
       contadorVueltas++;
     }
+    alert("la nota final del estudiante es " + notaMedioCiclo);
     notaMedioCiclo = 0;
   }
-  console.log("estado " + contadorVueltas);
-  console.log("estado " + notaTotal);
-  alert("el promedio final de notas es: " + notaTotal / contadorVueltas);
+  // console.log("estado " + contadorVueltas);
+  // console.log("estado " + notaTotal);
+  if (contadorVueltas>0) alert("el promedio final de notas es: " + notaTotal / contadorVueltas);
 });
 
-//document.getElementById("app")?.innerHTML = "cola loca";
+
 // ingresa el nombre;
 // verificar nombre distinto de nulo
 
