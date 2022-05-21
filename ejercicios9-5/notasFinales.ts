@@ -17,85 +17,49 @@ function claseNota(nota: number, tipoNota: number): number {
   }
 }
 
-function verificacionNota(tipoNota: number): number {
-  let notaAuxLocal = Number(prompt("Ingrese la nota:"));
-
-  if (notaAuxLocal < 11 && notaAuxLocal >= 0) {
-    notaAuxLocal = claseNota(notaAuxLocal, tipoNota);
-  } else {
-    alert("Nota ingresada invalida, pase al siguiente estudiante");
-    notaAuxLocal = -1;
-  }
-  return notaAuxLocal;
+function verificacionNota(nota): boolean {
+  let numValido: boolean;
+  if (nota == null || nota == "" || nota > 10 || nota < 0) numValido = false;
+  else if (nota < 11 && nota >= 0) numValido = true;
+  return numValido;
 }
 
-function verificacionNombre(): boolean {
+function verificacionNombre(nombre: string): boolean {
   let finCiclo: boolean = false;
-  let nombreAux: string = prompt("ingrese el nombre del estudiante");
-  if (nombreAux !== "") {
-    alert("Nombre " + nombreAux + " valido, proceda a cargar los datos");
-  } else {
-    alert("Fin del ciclo, comienza calculo del promedio.");
-    finCiclo = true;
-  }
+  if (nombre == "" || nombre == null) finCiclo = true;
   return finCiclo;
 }
 
 botonaso.addEventListener("click", () => {
   let finCiclo: boolean = false;
   let notaAux: number = 0;
-  let contadorVueltas: number = 0;
-  let notaMedioCiclo: number = 0;
-  let notaTotal: number = 0;
+  let nombreAux: string;
+  let notaFinal: number = 0;
+  let notaValida: boolean=false;
 
   while (finCiclo !== true) {
-   
-    finCiclo = verificacionNombre();
-  
+    nombreAux = prompt("ingrese el nombre del estudiante");
+    finCiclo = verificacionNombre(nombreAux);
+
     if (finCiclo == false) {
-      for (let cantNotas: number = 1; cantNotas < 4; cantNotas++) {
-        notaAux = verificacionNota(cantNotas);
-        if (notaAux != -1) {
-          notaMedioCiclo = notaMedioCiclo + notaAux;
-        } else {
-          notaMedioCiclo = 0;
-          break;
-        }
-      }
+      alert(
+        "El nombre " +
+          nombreAux +
+          " es valido, por favor continue con la carga de datos:"
+      );
+          for (let tipoNota: number = 1; tipoNota < 4; tipoNota++) {
+              notaAux = prompt("Ingrese la nota numero " + tipoNota);
+              notaValida = verificacionNota(notaAux);
+                  if (notaValida == true) notaAux=claseNota(notaAux, tipoNota);
+                  else{
+                    alert("nota ingresada invalida, pase al siguiente estudiante");
+                    break;
+                  }
+              notaFinal=notaAux+notaFinal;        
+          }
     }
-    notaTotal = notaTotal + notaMedioCiclo;
-    if (notaMedioCiclo !== 0) {
-      contadorVueltas++;
-    }
-    alert("la nota final del estudiante es " + notaMedioCiclo);
-    notaMedioCiclo = 0;
-  }
-  // console.log("estado " + contadorVueltas);
-  // console.log("estado " + notaTotal);
-  if (contadorVueltas>0) alert("el promedio final de notas es: " + notaTotal / contadorVueltas);
+    if (notaValida == true) alert("la nota final del estudiante es " + notaFinal);
+    notaFinal = 0;
+    notaValida=false;
+  } else alert("El nombre no es valido, fin de la carga de datos");
 });
-
-
-// ingresa el nombre;
-// verificar nombre distinto de nulo
-
-// ingresar nota
-
-// 3 llamados, a doble parametro, indicando el porcentaje
-// while funcion verificarNota=true;
-
-//  Funcion verificar Nota Valida
-
-//     Si,continuar
-//     No,pasar a otro nombre
-
-//la primer nota se multiplica por 0.1, la segunda por 0,5 y la tercera por 0,4
-
-//for ( notas =0 ; notas<=3; notas++){
-
-//let notasTotal:number=0;
-//let notaAux:number=Number(prompt("Ingrese notas:";"nota"));
-//let notasTotal=notasTotal+notaAux;
-//console.log(notaAux)
-
-//}
